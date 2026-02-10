@@ -1,0 +1,4 @@
+Línea 8: la propiedad Icon de fmaterials tenía una referencia a archivo no válida.
+Línea 30: la propiedad Bindings de DBGrid1 tenía una referencia a archivo no válida.
+Línea 34: la propiedad OleObjectBlob de DBGrid1 tenía una referencia a archivo no válida.
+Línea 29: Imposible cargar el control DBGrid1.

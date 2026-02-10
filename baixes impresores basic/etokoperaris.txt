@@ -1,0 +1,9 @@
+07/06/2013 18:08:17MassaMtrs Com: 148992Mtrs: 9167 MtrsFets: 9167 Op: 2
+07/06/2013 18:12:54 MassaMtrs Com: 148992 Mtrs: 9167 MtrsFets: 10300 Op: 2
+27/06/2013 17:31:27 MassaMtrs Com: 149805 Mtrs: 7425 MtrsFets: 8950 Op: 50
+27/06/2013 17:33:08 MassaMtrs Com: 149805 Mtrs: 7425 MtrsFets: 8950 Op: 50
+04/07/2013 16:02:53 MassaMtrs Com: 149991 Mtrs: 26250 MtrsFets: 30134 Op: 42
+04/07/2013 17:48:58 MassaMtrs Com: 149991 Mtrs: 26250 MtrsFets: 30134 Op: 42
+04/07/2013 17:49:38 MassaMtrs Com: 149991 Mtrs: 26250 MtrsFets: 30134 Op: 42
+05/07/2013 19:02:12 MassaMtrs Com: 149991 Mtrs: 26250 MtrsFets: 30134 Op: 42
+08/07/2013 17:28:18 MassaMtrs Com: 149991 Mtrs: 26250 MtrsFets: 30134 Op: 42

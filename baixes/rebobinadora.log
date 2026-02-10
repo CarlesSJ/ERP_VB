@@ -1,0 +1,13 @@
+Línea 10: la propiedad Icon de Rebobinadores tenía una referencia a archivo no válida.
+Línea 19: la propiedad Picture de eliminar tenía una referencia a archivo no válida.
+Línea 81: la propiedad ItemData de List1 tenía una referencia a archivo no válida.
+Línea 83: la propiedad List de List1 tenía una referencia a archivo no válida.
+Línea 90: la propiedad Bindings de DBGrid1 tenía una referencia a archivo no válida.
+Línea 93: la propiedad OleObjectBlob de DBGrid1 tenía una referencia a archivo no válida.
+Línea 89: Imposible cargar el control DBGrid1.
+Línea 101: la propiedad Picture de Command2 tenía una referencia a archivo no válida.
+Línea 349: la propiedad ItemData de Combo2 tenía una referencia a archivo no válida.
+Línea 351: la propiedad List de Combo2 tenía una referencia a archivo no válida.
+Línea 372: la propiedad ItemData de Combo1 tenía una referencia a archivo no válida.
+Línea 374: la propiedad List de Combo1 tenía una referencia a archivo no válida.
+Línea 817: la propiedad MouseIcon de nomclient tenía una referencia a archivo no válida.

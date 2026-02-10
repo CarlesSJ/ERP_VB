@@ -1,0 +1,7 @@
+Línea 9: la propiedad Icon de formseleccio tenía una referencia a archivo no válida.
+Línea 16: la propiedad Bindings de DBGrid2 tenía una referencia a archivo no válida.
+Línea 19: la propiedad OleObjectBlob de DBGrid2 tenía una referencia a archivo no válida.
+Línea 15: Imposible cargar el control DBGrid2.
+Línea 43: la propiedad Picture de Command3 tenía una referencia a archivo no válida.
+Línea 58: la propiedad Picture de sortirs tenía una referencia a archivo no válida.
+Línea 68: la propiedad Picture de Command1 tenía una referencia a archivo no válida.

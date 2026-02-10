@@ -1,0 +1,8 @@
+horarismaquines = 100, 100, 1133, 743, C, 125, 125, 1168, 768, C
+Module1 = 0, 0, 1152, 561, C
+planificacio = 84, 86, 1103, 829, C, -2, 16, 1422, 808, 
+veurereport = 0, 0, 0, 0, C, 175, 175, 1218, 818, C
+missatgevist = 0, 0, 0, 0, C, 200, 200, 1243, 843, C
+Formagrupartreballs = 0, 0, 0, 0, C, 225, 225, 1268, 868, C
+formannex = 275, 275, 1308, 918, C, 250, 250, 1293, 893, C
+formseleccio = 0, 0, 1142, 561, C, 275, 275, 1318, 918, C

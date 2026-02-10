@@ -1,0 +1,315 @@
+{
+	FILE: C:\Mis documentos\commandes\repositori dades velles.crf
+	DATE: 27/04/05  
+	TIME: 16:17:38
+}
+
+
+VERSION "1.00"
+NAME "repositori dades velles"
+CONNECTION "Dades_antigues_inplacsa"
+DATABASE "fabrica"
+TABLES
+BEGIN
+	TABLE "accesori"
+		(
+		"accesor"                          CHAR(5) LABEL "ACCESORIO" NOT NULL UPSHIFT NOUPDATE COMMENT " ",
+		"nomacce"                          CHAR(40) LABEL "NOMACCE" NOT NULL UPSHIFT COMMENT " ",
+		"pvpacce"                          DECIMAL(8,2) LABEL "PVP" FORMAT "#,###.#&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("accesor")
+	TABLE "aditivos"
+		(
+		"aditivo"                          SMALLINT LABEL "ADIT" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"nomadit"                          CHAR(40) LABEL "NOMADIT" NOT NULL UPSHIFT COMMENT " ",
+		"tpcadit"                          DECIMAL(5,1) LABEL "TPC" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"pvpadit"                          SMALLINT LABEL "PVP" FORMAT "#,##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("aditivo")
+	TABLE "clientes"
+		(
+		"cliente"                          INTEGER LABEL "CLIENTE" NOT NULL FORMAT "&&&&&&" DEFAULT "0" COMMENT " ",
+		"nombreco"                         CHAR(35) LABEL "NOMBRECO" NOT NULL UPSHIFT COMMENT " ",
+		"domicico"                         CHAR(35) LABEL "DOMICILIOCO" UPSHIFT COMMENT " ",
+		"postalco"                         INTEGER LABEL "POSTALCO" RIGHT ZEROFILL FORMAT "&&&&&" DEFAULT "0" COMMENT " ",
+		"poblaco"                          CHAR(35) LABEL "POBLACO" UPSHIFT COMMENT " ",
+		"provinco"                         CHAR(25) LABEL "PROVINCO" UPSHIFT COMMENT " ",
+		"telco"                            CHAR(25) LABEL "TELFCO" UPSHIFT COMMENT " ",
+		"faxco"                            CHAR(25) LABEL "FAXCO" UPSHIFT COMMENT " ",
+		"nombreen"                         CHAR(35) LABEL "NOMBREEN" NOT NULL UPSHIFT COMMENT " ",
+		"domicien"                         CHAR(35) LABEL "DOMICILIOEN" UPSHIFT COMMENT " ",
+		"postalen"                         INTEGER LABEL "POSTALEN" RIGHT ZEROFILL FORMAT "&&&&&" DEFAULT "0" COMMENT " ",
+		"poblaen"                          CHAR(35) LABEL "POBLAEN" UPSHIFT COMMENT " ",
+		"provinen"                         CHAR(25) LABEL "PROVINEN" UPSHIFT COMMENT " ",
+		"telen"                            CHAR(25) LABEL "TELFEN" UPSHIFT COMMENT " ",
+		"faxen"                            CHAR(25) LABEL "FAXEN" UPSHIFT COMMENT " ",
+		"obcli"                            CHAR(70) LABEL "OBCLI" UPSHIFT COMMENT " ",
+		"obext"                            CHAR(70) LABEL "OBEXT" UPSHIFT COMMENT " ",
+		"obimp"                            CHAR(70) LABEL "OBIMP" UPSHIFT COMMENT " ",
+		"obsol"                            CHAR(70) LABEL "OBSOL" UPSHIFT COMMENT " ",
+		"fite"                             CHAR(1) LABEL "FICHA TECNICA" NOT NULL DEFAULT "N" COMMENT " ",
+		"faxpvp"                           CHAR(25) LABEL "FAX PREU" COMMENT " "
+		)
+		PRIMARY KEY ("cliente")
+		DISTINCT INDEX "idx_clno"("nombreen" ASC)
+	TABLE "colorant"
+		(
+		"color"                            SMALLINT LABEL "COLOR" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"nomcolor"                         CHAR(40) LABEL "NOMCOLOR" NOT NULL UPSHIFT COMMENT " ",
+		"tpccolor"                         DECIMAL(5,1) LABEL "TPC" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"pvpcolor"                         SMALLINT LABEL "PVP" FORMAT "#,##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("color")
+	TABLE "contador"
+		(
+		"ncli"                             INTEGER LABEL "NCLIENTE" COMMENT " ",
+		"nped"                             INTEGER LABEL "NPEDIDO" COMMENT " "
+		)
+	TABLE "entregas"
+		(
+		"entrega"                          SMALLINT LABEL "TIPENTREGA" NOT NULL NOUPDATE FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"noment"                           CHAR(35) LABEL "NOMENT" NOT NULL UPSHIFT COMMENT " "
+		)
+		PRIMARY KEY ("entrega")
+	TABLE "maquinas"
+		(
+		"maqsec"                           CHAR(3) LABEL "MAQSEC" NOT NULL UPSHIFT NOUPDATE COMMENT " ",
+		"maquina"                          SMALLINT LABEL "MAQUINA" NOT NULL NOUPDATE FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"nommaq"                           CHAR(35) LABEL "NOMMAQ" NOT NULL UPSHIFT COMMENT " ",
+		"pvpmaq"                           SMALLINT LABEL "PVP" FORMAT "##,##&" DEFAULT "0" COMMENT " ",
+		"renmaq"                           SMALLINT LABEL "REND" FORMAT "##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("maqsec","maquina")
+		JOIN FOREIGN KEY "fk_maqsec"("maqsec") REFERENCES "seccione"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nomsec")
+	TABLE "material"
+		(
+		"materia"                          SMALLINT LABEL "MATERIAL" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"nommat"                           CHAR(40) LABEL "NOMMATERIAL" NOT NULL UPSHIFT COMMENT " ",
+		"pvpmat"                           SMALLINT LABEL "PVP" FORMAT "#,##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("materia")
+	TABLE "operario"
+		(
+		"opsec"                            CHAR(3) LABEL "OPSEC" NOT NULL UPSHIFT NOUPDATE COMMENT " ",
+		"op"                               SMALLINT LABEL "OP" NOT NULL NOUPDATE FORMAT "&&" DEFAULT "0" COMMENT " ",
+		"nomop"                            CHAR(30) LABEL "NOMOP" NOT NULL UPSHIFT COMMENT " "
+		)
+		PRIMARY KEY ("opsec","op")
+		JOIN FOREIGN KEY "fk_opsec"("opsec") REFERENCES "seccione"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nomsec")
+	TABLE "pedidos"
+		(
+		"pedido"                           INTEGER LABEL "PEDIDO" NOT NULL FORMAT "&&&&&&" DEFAULT "0" COMMENT " ",
+		"clientep"                         INTEGER LABEL "CLIENTEP" NOT NULL FORMAT "&&&&&&" DEFAULT "0" COMMENT " ",
+		"producp"                          CHAR(4) LABEL "PRODP" NOT NULL UPSHIFT COMMENT " ",
+		"fechaped"                         DATE LABEL "FECHAPED" NOT NULL DEFAULT "TODAY" COMMENT " ",
+		"fechaent"                         DATE LABEL "FECHAENT" NOT NULL COMMENT " ",
+		"pvp"                              MONEY(9,3) LABEL "PVP" FORMAT "#,###.##&" DEFAULT "0.0" COMMENT " ",
+		"numpre"                           INTEGER LABEL "PRE" FORMAT "&&&&&&" DEFAULT "0" COMMENT " ",
+		"fpvp"                             DATE LABEL "FEPVP" COMMENT " ",
+		"marca"                            CHAR(9) LABEL "MARCA" UPSHIFT COMMENT " ",
+		"pvpre"                            MONEY(9,3) LABEL "PVPRE" FORMAT "#,###.##&" DEFAULT "0.0" COMMENT " ",
+		"fpvprev"                          DATE LABEL "FEPVPRE" COMMENT " ",
+		"pvprev"                           MONEY(9,3) LABEL "PVPREV" FORMAT "#,###.##&" DEFAULT "0.0",
+		"pvpclipr"                         MONEY(7,0) LABEL "PVPCLIPR" FORMAT "###,##&" DEFAULT "0.0" COMMENT " ",
+		"entregap"                         SMALLINT LABEL "TIPOENT" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"obpedido"                         CHAR(70) LABEL "OBPEDIDO" UPSHIFT COMMENT " ",
+		"estadop"                          CHAR(1) LABEL "ESTADOP" UPSHIFT COMMENT " ",
+		"situaped"                         CHAR(1) LABEL "SITU" UPSHIFT COMMENT " ",
+		"tubolam"                          CHAR(1) LABEL "TL" UPSHIFT COMMENT " ",
+		"anchoe"                           DECIMAL(5,1) LABEL "ANCHOE" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"plegadoe"                         DECIMAL(5,1) LABEL "PLEGE" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"galgae"                           SMALLINT LABEL "GALE" FORMAT "#,##&" DEFAULT "0" COMMENT " ",
+		"materex"                          SMALLINT LABEL "MATERIAL" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"colorex"                          SMALLINT LABEL "COLOR" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"aditivex"                         SMALLINT LABEL "ADIT" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"extrusor"                         SMALLINT LABEL "EXT" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"cantex"                           INTEGER LABEL "CANTEXK" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"ucant"                            CHAR(4) LABEL "UCANT" UPSHIFT COMMENT " ",
+		"abex"                             CHAR(1) LABEL "ABE" UPSHIFT COMMENT " ",
+		"tratado"                          SMALLINT LABEL "TRAT" FORMAT "&" DEFAULT "0" COMMENT " ",
+		"micrex"                           CHAR(1) LABEL "MICREX" UPSHIFT DEFAULT "N" COMMENT " ",
+		"p1000"                            DECIMAL(9,3) LABEL "P1000" FORMAT "#,###.##&" DEFAULT "0.0" COMMENT " ",
+		"obextpe"                          CHAR(70) LABEL "OBEXPE" UPSHIFT COMMENT " ",
+		"at1"                              CHAR(30) LABEL "AT1" UPSHIFT COMMENT " ",
+		"at2"                              CHAR(30) LABEL "AT2" UPSHIFT COMMENT " ",
+		"at3"                              CHAR(30) LABEL "AT3" UPSHIFT COMMENT " ",
+		"at4"                              CHAR(30) LABEL "AT4" UPSHIFT COMMENT " ",
+		"at5"                              CHAR(30) LABEL "AT5" UPSHIFT COMMENT " ",
+		"at6"                              CHAR(30) LABEL "AT6" UPSHIFT COMMENT " ",
+		"bt1"                              CHAR(30) LABEL "BT1" UPSHIFT COMMENT " ",
+		"bt2"                              CHAR(30) LABEL "BT2" UPSHIFT COMMENT " ",
+		"bt3"                              CHAR(30) LABEL "BT3" UPSHIFT COMMENT " ",
+		"bt4"                              CHAR(30) LABEL "BT4" UPSHIFT COMMENT " ",
+		"bt5"                              CHAR(30) LABEL "BT5" UPSHIFT COMMENT " ",
+		"bt6"                              CHAR(30) LABEL "BT6" UPSHIFT COMMENT " ",
+		"numt"                             SMALLINT LABEL "NT" FORMAT "&&" DEFAULT "0" COMMENT " ",
+		"impres"                           CHAR(1) LABEL "TPIM" UPSHIFT COMMENT " ",
+		"desar"                            DECIMAL(5,1) LABEL "DES" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"cilin"                            DECIMAL(5,1) LABEL "CIL" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"impresor"                         SMALLINT LABEL "IMP" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"mtmin"                            SMALLINT LABEL "MTMIN" FORMAT "##&" DEFAULT "0" COMMENT " ",
+		"abim"                             CHAR(1) LABEL "AIM" UPSHIFT COMMENT " ",
+		"archivo"                          CHAR(7) LABEL "ARCHIVO" UPSHIFT COMMENT " ",
+		"obimpe"                           CHAR(70) LABEL "OBIMPE" UPSHIFT COMMENT " ",
+		"bollam"                           CHAR(1) LABEL "BA" UPSHIFT COMMENT " ",
+		"anchos"                           DECIMAL(5,1) LABEL "ANCHOS" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"plegados"                         DECIMAL(5,1) LABEL "PLEGS" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"longitud"                         DECIMAL(5,1) LABEL "LONGS" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"galgas"                           SMALLINT LABEL "GALS" FORMAT "#,##&" DEFAULT "0" COMMENT " ",
+		"cants"                            INTEGER LABEL "CANTS" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"fbas"                             DECIMAL(4,1) LABEL "FBAS" FORMAT "##.&" DEFAULT "0.0" COMMENT " ",
+		"fbo"                              DECIMAL(4,1) LABEL "FBOC" FORMAT "##.&" DEFAULT "0.0" COMMENT " ",
+		"sol"                              DECIMAL(4,1) LABEL "SLP" FORMAT "##.&" DEFAULT "0.0" COMMENT " ",
+		"soldador"                         SMALLINT LABEL "SOL" FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"tac"                              SMALLINT LABEL "TAC" FORMAT "##&" DEFAULT "0" COMMENT " ",
+		"sim"                              SMALLINT LABEL "SIM" FORMAT "&" DEFAULT "0" COMMENT " ",
+		"tpsol"                            CHAR(1) LABEL "TS" UPSHIFT COMMENT " ",
+		"troquel"                          CHAR(5) LABEL "TROQUEL" UPSHIFT COMMENT " ",
+		"asas"                             CHAR(5) LABEL "ASAS" UPSHIFT COMMENT " ",
+		"cinta"                            CHAR(5) LABEL "CINTA" UPSHIFT COMMENT " ",
+		"micrs"                            CHAR(1) LABEL "MICRS" UPSHIFT COMMENT " ",
+		"tal"                              SMALLINT LABEL "TA" FORMAT "#&" DEFAULT "0" COMMENT " ",
+		"diamta"                           SMALLINT LABEL "DIAT" FORMAT "#&" DEFAULT "0" COMMENT " ",
+		"obsolpe"                          CHAR(70) LABEL "OBSOPE" UPSHIFT COMMENT " ",
+		"extp"                             SMALLINT LABEL "EXP" FORMAT "&&&" DEFAULT "0",
+		"ecanp"                            DECIMAL(5,2) LABEL "HCANE" FORMAT "##.#&" DEFAULT "0.0",
+		"efunp"                            DECIMAL(5,2) LABEL "HFUNE" FORMAT "##.#&" DEFAULT "0.0",
+		"ekgp"                             DECIMAL(12,2) LABEL "KGE" FORMAT "#,###,###.#&" DEFAULT "0.0",
+		"ekghop"                           DECIMAL(5,1) LABEL "KGHOE" FORMAT "###.&" DEFAULT "0.0",
+		"imp"                              SMALLINT LABEL "IMP" FORMAT "&&&" DEFAULT "0",
+		"iop"                              SMALLINT LABEL "OPI" FORMAT "&&" DEFAULT "0",
+		"icanp"                            DECIMAL(5,2) LABEL "HCANI" FORMAT "##.#&" DEFAULT "0.0",
+		"imtprop"                          INTEGER LABEL "MTPROI" FORMAT "#,###,##&" DEFAULT "0",
+		"imtminp"                          SMALLINT LABEL "MTMINPI" FORMAT "##&" DEFAULT "0",
+		"ifunp"                            DECIMAL(5,2) LABEL "HFUNI" FORMAT "##.#&" DEFAULT "0.0",
+		"imtp"                             INTEGER LABEL "MTI" FORMAT "#,###,##&" DEFAULT "0",
+		"imtminre"                         SMALLINT LABEL "MTMINREI" FORMAT "##&" DEFAULT "0",
+		"rep"                              SMALLINT LABEL "REP" FORMAT "&&&" DEFAULT "0",
+		"rop"                              SMALLINT LABEL "OPR" FORMAT "&&" DEFAULT "0",
+		"rcanp"                            DECIMAL(5,2) LABEL "HCANR" FORMAT "##.#&" DEFAULT "0.0",
+		"rmtprop"                          INTEGER LABEL "MTPROR" FORMAT "#,###,##&" DEFAULT "0",
+		"rmtminp"                          SMALLINT LABEL "MTMINPR" FORMAT "##&" DEFAULT "0",
+		"rsimp"                            SMALLINT LABEL "SIMPR" FORMAT "&" DEFAULT "0",
+		"rfunp"                            DECIMAL(5,2) LABEL "HFUNR" FORMAT "##.#&" DEFAULT "0.0",
+		"rmtp"                             INTEGER LABEL "MTR" FORMAT "#,###,##&" DEFAULT "0",
+		"rmtminre"                         SMALLINT LABEL "MTMINRER" FORMAT "##&" DEFAULT "0",
+		"solp"                             SMALLINT LABEL "SOP" FORMAT "&&&" DEFAULT "0",
+		"sop"                              SMALLINT LABEL "OPS" FORMAT "&&" DEFAULT "0",
+		"scanp"                            DECIMAL(5,2) LABEL "HCANS" FORMAT "##.#&" DEFAULT "0.0",
+		"sboprop"                          INTEGER LABEL "BOPROS" FORMAT "#,###,##&" DEFAULT "0",
+		"stacp"                            SMALLINT LABEL "TACPS" FORMAT "##&" DEFAULT "0",
+		"ssimp"                            SMALLINT LABEL "SIMPS" FORMAT "&" DEFAULT "0",
+		"sfunp"                            DECIMAL(5,2) LABEL "HFUNS" FORMAT "##.#&" DEFAULT "0.0",
+		"sbop"                             INTEGER LABEL "BOS" FORMAT "#,###,##&" DEFAULT "0",
+		"sbohore"                          INTEGER LABEL "BOHORES" FORMAT "##,##&" DEFAULT "0",
+		"fechaex"                          DATE LABEL "FEX",
+		"fechaim"                          DATE LABEL "FIM",
+		"fechaso"                          DATE LABEL "FSO",
+		"fechaser"                         DATE LABEL "FSER",
+		"pt"                               CHAR(1) LABEL "PT" UPSHIFT COMMENT " ",
+		"cantbaj"                          INTEGER LABEL "CANTBAJ" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"obbaj"                            CHAR(70) LABEL "OBBA" UPSHIFT COMMENT " ",
+		"ecoshoca"                         INTEGER LABEL "C.CANVI" FORMAT "##,##&" DEFAULT "0" COMMENT " ",
+		"ecoshofu"                         INTEGER LABEL "C.FUN" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"ecoskgr"                          INTEGER LABEL "C.KGR" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"icoshoca"                         INTEGER LABEL "C.CANVI" FORMAT "##,##&" DEFAULT "0" COMMENT " ",
+		"icoshofu"                         INTEGER LABEL "C.FUN" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"ikgrtin"                          DECIMAL(6,2) LABEL "KGTIN" FORMAT "###.#&" DEFAULT "0.0" COMMENT " ",
+		"icoskgti"                         INTEGER LABEL "C.TIN" FORMAT "###,##&" DEFAULT "0" COMMENT " ",
+		"scoshoca"                         INTEGER LABEL "C.CANVI" FORMAT "##,##&" DEFAULT "0" COMMENT " ",
+		"scoshofu"                         INTEGER LABEL "C.FUN" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"rcoshoca"                         INTEGER LABEL "C.CANVI" FORMAT "##,##&" DEFAULT "0" COMMENT " ",
+		"rcoshofu"                         INTEGER LABEL "C.FUN" FORMAT "#,###,##&" DEFAULT "0" COMMENT " ",
+		"fechare"                          DATE LABEL "FRE" COMMENT " ",
+		"codba"                            CHAR(13) LABEL "COD BA" DEFAULT "0" COMMENT " ",
+		"lt1"                              SMALLINT LABEL "LINT1" FORMAT "##&" COMMENT " ",
+		"lt2"                              SMALLINT LABEL "LINT2" FORMAT "##&" COMMENT " ",
+		"lt3"                              SMALLINT LABEL "LINT3" FORMAT "##&" COMMENT " ",
+		"lt4"                              SMALLINT LABEL "LINT4" FORMAT "##&" COMMENT " ",
+		"lt5"                              SMALLINT LABEL "LINT5" FORMAT "##&" COMMENT " ",
+		"lt6"                              SMALLINT LABEL "LINT6" FORMAT "##&" COMMENT " ",
+		"armon"                            CHAR(8) LABEL "ARMON" COMMENT " ",
+		"ekghot"                           DECIMAL(5,1) LABEL "KGHOP" FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"euro"                             MONEY(8,4) LABEL "EURO" FORMAT "###.###&" DEFAULT "0.0" COMMENT " "
+		)
+		PRIMARY KEY ("pedido")
+		JOIN FOREIGN KEY "fk_pedcli"("clientep") REFERENCES "clientes"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nombreen","obcli","obext","obimp","obsol")
+		JOIN FOREIGN KEY "fk_pedmat"("materex") REFERENCES "material"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nommat")
+		JOIN FOREIGN KEY "fk_pedcol"("colorex") REFERENCES "colorant"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nomcolor")
+		JOIN FOREIGN KEY "fk_pedad"("aditivex") REFERENCES "aditivos"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+			LOOKUPS ("nomadit")
+		UNIQUE INDEX "idx_cons"("clientep" ASC "pedido" DESC "producp" ASC "situaped" ASC)
+		UNIQUE INDEX "idx_con2"("clientep" ASC "producp" ASC "pedido" DESC "situaped" ASC)
+		DISTINCT INDEX "idx_pefs"("fechaser" ASC)
+		UNIQUE INDEX "idx_ren1"("clientep" ASC "producp" ASC "pedido" DESC "tubolam" ASC "anchoe" ASC "plegadoe" ASC "galgae" ASC "materex" ASC)
+	TABLE "prodimp"
+		(
+		"prosec"                           CHAR(3) LABEL "SEC" NOT NULL UPSHIFT COMMENT " ",
+		"promaq"                           SMALLINT LABEL "MAQ" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("prosec","promaq")
+		JOIN FOREIGN KEY "c_promaq"("prosec","promaq") REFERENCES "maquinas"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+	TABLE "prodimpl"
+		(
+		"prolisec"                         CHAR(3) LABEL "SEC" NOT NULL UPSHIFT COMMENT " ",
+		"prolimaq"                         SMALLINT LABEL "MAQ" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"prolint"                          SMALLINT LABEL "NT" NOT NULL FORMAT "#&" DEFAULT "0" COMMENT " ",
+		"prolimtt"                         SMALLINT LABEL "MTT" NOT NULL FORMAT "##&" DEFAULT "0" COMMENT " ",
+		"prolimtp"                         SMALLINT LABEL "MTP" NOT NULL FORMAT "##&" DEFAULT "0" COMMENT " ",
+		"prolihoc"                         DECIMAL(5,2) LABEL "HCA" NOT NULL FORMAT "##.#&" DEFAULT "0.0" COMMENT " "
+		)
+		PRIMARY KEY ("prolisec","prolimaq","prolint")
+	TABLE "prodsol"
+		(
+		"socasec"                          CHAR(3) LABEL "SEC" NOT NULL UPSHIFT COMMENT " ",
+		"socamaq"                          SMALLINT LABEL "MAQ" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"socaesp"                          SMALLINT LABEL "GAL" NOT NULL FORMAT "#,##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("socasec","socamaq","socaesp")
+		JOIN FOREIGN KEY "fk_psoma"("socasec","socamaq") REFERENCES "maquinas"
+			ON UPDATE RESTRICT
+			ON DELETE RESTRICT
+	TABLE "prodsoll"
+		(
+		"solisec"                          CHAR(3) LABEL "SEC" NOT NULL UPSHIFT COMMENT " ",
+		"solimaq"                          SMALLINT LABEL "MAQ" NOT NULL FORMAT "&&&" DEFAULT "0" COMMENT " ",
+		"soliesp"                          SMALLINT LABEL "GAL" NOT NULL FORMAT "#,##&" DEFAULT "0" COMMENT " ",
+		"solimed"                          DECIMAL(5,1) LABEL "LONGS" NOT NULL FORMAT "###.&" DEFAULT "0.0" COMMENT " ",
+		"solitac"                          SMALLINT LABEL "TACT" FORMAT "##&" DEFAULT "0" COMMENT " ",
+		"solibop"                          INTEGER LABEL "BOHO" FORMAT "##,##&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("solisec","solimaq","soliesp","solimed")
+		DISTINCT INDEX "i_solima"("solisec" ASC "solimaq" ASC "soliesp" ASC)
+	TABLE "producto"
+		(
+		"produc"                           CHAR(4) LABEL "PROD" NOT NULL UPSHIFT NOUPDATE COMMENT " ",
+		"nomprodu"                         CHAR(25) LABEL "NOMPROD" NOT NULL UPSHIFT COMMENT " ",
+		"diasent"                          SMALLINT LABEL "DIASENT" NOT NULL FORMAT "&&" DEFAULT "0" COMMENT " "
+		)
+		PRIMARY KEY ("produc")
+	TABLE "seccione"
+		(
+		"seccion"                          CHAR(3) LABEL "SECCION" NOT NULL UPSHIFT COMMENT " ",
+		"nomsec"                           CHAR(15) LABEL "NOMSEC" NOT NULL UPSHIFT COMMENT " "
+		)
+		PRIMARY KEY ("seccion")
+END
